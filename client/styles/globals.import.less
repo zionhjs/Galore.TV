@@ -1,0 +1,145 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+@import url(https://fonts.googleapis.com/css?family=Karla);
+@import "{}/client/styles/black-tie.min.css";
+
+body {
+	background-color: @brand;
+	/*background-image: linear-gradient(left top, @brand, @accent 140%);*/
+	background: -webkit-linear-gradient(left top, @brand, @accent 130%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, @brand, @accent 130%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, @brand, @accent 130%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, @brand, @accent 130%);
+
+	background-attachment: fixed;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	padding: 0;
+	margin: 0;
+
+	font-family: 'Karla', sans-serif;
+	font-size: 14px;
+	color: black;
+}
+
+img {width: 100%;}
+
+a, a:focus {color: fade(black, 90%); text-decoration: none;}
+a:hover {color: @brand; text-decoration: none;}
+
+h1, h2, h3 {.font1; font-weight: 700; text-transform: uppercase;}
+
+ul {list-style-type: none; padding: 0;}
+
+p {overflow-wrap: break-word;}
+
+header {
+}
+
+.loader-container {
+  text-align: center;
+  display: table;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: 9999
+}
+
+.loader {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100vh;
+  // background: lighten(@brand, 35%);
+	background: @compliment;
+  padding: 20px;
+  /*box-shadow: inset 0 0 125px rgba(0,0,0,0.33);*/
+  box-shadow: inset 0 0 125px fade(@brand, 33%);
+  color: @accent;
+}
+
+.loader i.fa-spin {
+  /*Venus / Female*/
+  /*-webkit-transform-origin: 45% 28%;transform-origin: 45% 28%;*/
+  -webkit-transform-origin: 46% 43%;transform-origin: 46% 43%;
+}
+
+.loadMore {
+	margin-bottom: 40px;
+}
+
+flag {
+	background: white;
+    padding: 5px 10px;
+    margin-left: -15px;
+    .shadow;
+}
+
+a flag:hover {
+  color: white;
+  background: @brand;
+}
+
+.seeMore {
+  position: relative;
+  /* top: 0px; */
+  /* right: 15px; */
+  background: white;
+  border-radius: 50%;
+  padding: 7px 10px;
+  width: 32px;
+  height: 32px;
+  /* float: right; */
+  font-size: 15px;
+  box-shadow: 1px 1px 5px rgba(207, 53, 105, 0.33);
+  margin: 30px auto 0 auto;
+  text-align: center;
+}
+
+.snippet:hover .seeMore {
+	color: white;
+	background: @brand;
+}
+
+.snippet.last h5 {text-align: center;}
+
+#topBar {
+    /*width: 100%;*/
+    background: white;
+    border-radius: 0;
+    margin: 0;
+}
+
+#topBar ul li {
+  border: 0;
+}
+
+#globalContainer {
+    -webkit-overflow-scrolling: touch;
+}
+
+body.freeze {
+  overflow: hidden;
+}
+
+#mainContent {
+	background: white;
+}
+
+.footer {
+    padding: 40px 0;
+    min-height: 300px;
+    background: @grey;
+}
+
+.footer hr {
+    border-color: darken(@grey, 10%);
+    margin: 15px;
+}
+
+.copyright {
+    margin: 35px 0;
+}

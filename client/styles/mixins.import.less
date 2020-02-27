@@ -1,0 +1,74 @@
+// Main brand color for buttons, link hovers, colorful static gif, and top left of gradient
+@purple : #8A00AB;
+@plum : #CF3569;
+@lime : #7DD66D;
+@sky : #beffeb;
+@skin : fade(white, 66%);
+@red : #E8223C;
+@yellow: #F8ED38;
+
+/*@two : #FFE4B2;*/
+@one: @red;
+
+// Color for bottom right of gradient,
+// @two : spin(@one, -90);
+@two : darken(@one, 33%);
+// @three: spin(@one, -45);
+@three : @yellow;
+@four : lighten(@one, 1%);
+/*@four : #FA7470;*/
+
+@grey : #eee;
+@brand : lighten(@one, 0%);
+@accent : lighten(@two, 10%);
+
+// Color for logo hover, and loading screen background
+// @compliment : spin(lighten(@brand, 33%), 111);
+@compliment: @yellow;
+// @sky : lighten(@three, 20%);
+
+.font1 {font-family: 'Open Sans Condensed';}
+.font2 {font-family: 'Karla';}
+
+.noPadding {
+	padding: 0 !important;
+}
+
+.20padding {
+	padding: 20px !important;
+}
+
+.noMargin {
+	margin: 0 !important;
+}
+
+.90degCC {
+	-webkit-transform: rotate(-90deg) !important;
+	   -moz-transform: rotate(-90deg) !important;
+		 -o-transform: rotate(-90deg) !important;
+	        transform: rotate(-90deg) !important;
+}
+
+.90degC {
+	-webkit-transform: rotate(90deg) !important;
+	        transform: rotate(90deg) !important;
+}
+
+.vertCenter {
+	padding: 40vh 0px !important;
+}
+
+.tint:before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+    height: 333px;
+	background: rgba(0,155,255, 0.20);
+	.transition;
+}
+
+.transition {transition: all .3s linear;}
+
+.shadow {box-shadow: 1px 1px 5px fade(@brand, 33%);}
+.darkShadow {box-shadow: 1px 1px 8px rgba(0,0,0,0.33);}
