@@ -1,24 +1,24 @@
 if (Meteor.isServer) {
 
   Meteor.methods({
-      shows: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/shows");
-      }
+    shows: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/shows");
+    }
   });
 
   Meteor.methods({
-      featured: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/featured");
-      }
+    featured: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/featured");
+    }
   });
 
   Meteor.methods({
-      liveFrom: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/liveFrom");
-      }
+    liveFrom: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/liveFrom");
+    }
   });
 
   // Meteor.methods({
@@ -29,93 +29,93 @@ if (Meteor.isServer) {
   // });
 
   Meteor.methods({
-      model20: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/model20");
-      }
+    model20: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/model20");
+    }
   });
 
   Meteor.methods({
-      teachMe: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/teachMe");
-      }
+    teachMe: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/teachMe");
+    }
   });
 
   Meteor.methods({
-      girls: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/girls");
-      }
+    girls: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/girls");
+    }
   });
 
   Meteor.methods({
-      exclusives: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/exclusives");
-      }
+    exclusives: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/exclusives");
+    }
   });
 
   Meteor.methods({
-      bombshellOnStreet: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/bombshellOnStreet");
-      }
+    bombshellOnStreet: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/bombshellOnStreet");
+    }
   });
 
   Meteor.methods({
-      etc: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/etc");
-      }
+    etc: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/etc");
+    }
   });
 
   Meteor.methods({
-      originals: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/originals");
-      }
+    originals: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/originals");
+    }
   });
 
   Meteor.methods({
-      uncovered: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/uncovered");
-      }
+    uncovered: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/uncovered");
+    }
   });
 
   Meteor.methods({
-      beautyConfessional: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/beautyConfessional");
-      }
+    beautyConfessional: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoretv-api.herokuapp.com/beautyConfessional");
+    }
   });
 
   // WordPress Methods
   Meteor.methods({
-      wp: function () {
-          this.unblock();
-          return Meteor.http.call("GET", "https://galoremag.com/wp-json/wp/v2/posts");
-      }
+    wp: function () {
+      this.unblock();
+      return Meteor.http.call("GET", "https://galoremag.com/wp-json/wp/v2/posts");
+    }
   });
 
   function makeSlug(title) {
     let str = title;
-        str = str.replace(/[^a-zA-Z0-9\s]/g,"");
-        str = str.toLowerCase();
-        str = str.replace(/\s/g,'-');
-        str = str.replace(/^-+|-+$|(-)+/g, '$1');
-        return str;
+    str = str.replace(/[^a-zA-Z0-9\s]/g, "");
+    str = str.toLowerCase();
+    str = str.replace(/\s/g, '-');
+    str = str.replace(/^-+|-+$|(-)+/g, '$1');
+    return str;
   }
 
-  let everyHour = new Cron(function() {
-    Meteor.call("shows", function(error, results) {
+  let everyHour = new Cron(function () { //important 
+    Meteor.call("shows", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // debugger;
           Shows.upsert(item.url, {
             $set: {
@@ -132,15 +132,15 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("featured", function(error, results) {
+    Meteor.call("featured", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        Vids.update({"featured": true}, {$set: {"featured": false}}, {multi: true});
+        Vids.update({ "featured": true }, { $set: { "featured": false } }, { multi: true });
 
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -158,13 +158,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("liveFrom", function(error, results) {
+    Meteor.call("liveFrom", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -176,7 +176,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -184,13 +184,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("model20", function(error, results) {
+    Meteor.call("model20", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -202,7 +202,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -210,13 +210,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("teachMe", function(error, results) {
+    Meteor.call("teachMe", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -228,7 +228,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -236,13 +236,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("girls", function(error, results) {
+    Meteor.call("girls", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -254,7 +254,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -262,13 +262,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("bombshellOnStreet", function(error, results) {
+    Meteor.call("bombshellOnStreet", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -280,7 +280,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -288,13 +288,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("originals", function(error, results) {
+    Meteor.call("originals", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -306,7 +306,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -314,13 +314,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("etc", function(error, results) {
+    Meteor.call("etc", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -333,7 +333,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -341,13 +341,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("exclusives", function(error, results) {
+    Meteor.call("exclusives", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -360,7 +360,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -368,13 +368,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("uncovered", function(error, results) {
+    Meteor.call("uncovered", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -387,7 +387,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -395,13 +395,13 @@ if (Meteor.isServer) {
       }
     });
 
-    Meteor.call("beautyConfessional", function(error, results) {
+    Meteor.call("beautyConfessional", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // console.log(item.title);
           Vids.upsert(item.url, {
             $set: {
@@ -414,7 +414,7 @@ if (Meteor.isServer) {
               thumb: item.thumb,
               thumbLg: item.thumbLg
             },
-            $addToSet : {
+            $addToSet: {
               listId: item.listId
             }
           }, true);
@@ -423,13 +423,13 @@ if (Meteor.isServer) {
     });
 
 
-    Meteor.call("wp", function(error, results) {
+    Meteor.call("wp", function (error, results) {
       if (error) {
         console.log(error);
       } else {
         let data = JSON.parse(results.content); //results.data should be a JSON object
         // Session.set(data);
-        _.each(data, function(item) {
+        _.each(data, function (item) {
           // let featImg = item.featured_image_url;
           // let newFeatImg = featImg.replace("/upload/","/upload/c_fill,dpr_2.0,f_auto,fl_lossy.progressive,h_124,q_70,w_220/");
           let featImg = item.better_featured_image.media_details.sizes.thumbnail.source_url;
@@ -452,11 +452,11 @@ if (Meteor.isServer) {
       }
     });
   }, {
-      minute: 35
+    minute: 11
   });
 
   // Function once Meteor starts up
-  Meteor.startup(function() {
+  Meteor.startup(function () {
 
   });
 

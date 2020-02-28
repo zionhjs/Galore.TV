@@ -44,7 +44,7 @@ Home = React.createClass({
   },
 
   renderSlides() {
-    if(!this.props.featured) {
+    if (!this.props.featured) {
       return;
     } else {
       return this.props.featured.map((slide) => {
@@ -55,7 +55,7 @@ Home = React.createClass({
 
   getInitialState() {
     return {
-      vids:[],
+      vids: [],
       exclusives: [],
       featured: [],
       originals: []
@@ -80,7 +80,7 @@ Home = React.createClass({
   },
 
   showLink(linkSlug) {
-    let params = {slug: linkSlug};
+    let params = { slug: linkSlug };
 
     let link = FlowRouter.path("show", params);
 
@@ -91,23 +91,23 @@ Home = React.createClass({
 
     DocHead.setTitle("GaloreTV 💅🏾 Video for The Modern Girl");
 
-    let canonical = {rel: "canonical", href: "http://tv.galoremag.com"},
-        metaTitle = {name: "title", content: "GaloreTV 💅🏾 Video for The Modern Girl"},
-        metaInfo = {name: "description", content: "Videos On Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl"},
-        ogTitleMeta = {property: "og:title", content: "GaloreTV 💅🏾 Video for The Modern Girl"},
-        ogDescMeta = {property: "og:description", content: "Videos On Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl"},
-        ogTypeMeta = {property: "og:type", content: "website"},
-        ogUrlMeta = {property: "og:url", content: "http://tv.galoremag.com"},
-        ogImageMeta = {property: "og:image:secure_url", content: "http://tv.galoremag.com/img/galoretv_cover.jpg"},
-        ogImageWidth = {property: "og:image:width", content: "600"},
-        ogImageHeight = {property: "og:image:height", content: "405"};
+    let canonical = { rel: "canonical", href: "http://tv.galoremag.com" },
+      metaTitle = { name: "title", content: "GaloreTV 💅🏾 Video for The Modern Girl" },
+      metaInfo = { name: "description", content: "Videos On Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl" },
+      ogTitleMeta = { property: "og:title", content: "GaloreTV 💅🏾 Video for The Modern Girl" },
+      ogDescMeta = { property: "og:description", content: "Videos On Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl" },
+      ogTypeMeta = { property: "og:type", content: "website" },
+      ogUrlMeta = { property: "og:url", content: "http://tv.galoremag.com" },
+      ogImageMeta = { property: "og:image:secure_url", content: "http://tv.galoremag.com/img/galoretv_cover.jpg" },
+      ogImageWidth = { property: "og:image:width", content: "600" },
+      ogImageHeight = { property: "og:image:height", content: "405" };
 
-    let twitterCard = {name: "twitter:card", content: "summary"},
-        twitterDesc = {name: "twitter:description", content: "Videos on Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl"},
-        twitterTitle = {name: "twitter:title", content: "GaloreTV 💅🏾 Video For The Modern Girl"},
-        twitterSite = {name: "twitter:site", content: "@thegaloremag"},
-        twitterImage = {name: "twitter:image", content: "http://tv.galoremag.com/img/galoretv_cover.jpg"},
-        twitterCreator = {name: "twitter:creator", content: "@thegaloremag"};
+    let twitterCard = { name: "twitter:card", content: "summary" },
+      twitterDesc = { name: "twitter:description", content: "Videos on Fashion, Beauty, Sex, Dating, Bombshells, Celebrities, Music, & Pop Culture For The Modern Girl" },
+      twitterTitle = { name: "twitter:title", content: "GaloreTV 💅🏾 Video For The Modern Girl" },
+      twitterSite = { name: "twitter:site", content: "@thegaloremag" },
+      twitterImage = { name: "twitter:image", content: "http://tv.galoremag.com/img/galoretv_cover.jpg" },
+      twitterCreator = { name: "twitter:creator", content: "@thegaloremag" };
 
     DocHead.addMeta(metaTitle);
     DocHead.addMeta(metaInfo);
@@ -251,61 +251,61 @@ HomeWrapper = React.createClass({
   getMeteorData() {
 
     let data = {},
-        handles = [VidSub.subscribe("vids"),
-                   PostSub.subscribe("posts")];
+      handles = [VidSub.subscribe("vids"),
+      PostSub.subscribe("posts")];
     if (!handles.every(utils.isReady)) {
-        data.loading = true;
-        return data;
+      data.loading = true;
+      return data;
     } else {
-        let vids = Vids.find({
-          originals: {$nin: [true]},
-          title: {$nin: ['Private video', 'Deleted video']}
-        }, {
-            sort: {
-                date: -1
-            }, limit: 20
-        }).fetch();
+      let vids = Vids.find({
+        originals: { $nin: [true] },
+        title: { $nin: ['Private video', 'Deleted video'] }
+      }, {
+        sort: {
+          date: -1
+        }, limit: 20
+      }).fetch();
 
-        let featured = Vids.find({
-          featured: true,
-          title: {$nin: ['Private video', 'Deleted video']}
-        }, {
-            sort: {
-                date: -1
-            }
-        }).fetch();
+      let featured = Vids.find({
+        featured: true,
+        title: { $nin: ['Private video', 'Deleted video'] }
+      }, {
+        sort: {
+          date: -1
+        }
+      }).fetch();
 
-        let exclusives = Vids.find({
-          listId: "PLx0X0-cKhSOBXGK3Yr11j1HLa_ccrNO2G",
-          title: {$nin: ['Private video', 'Deleted video']}
-        }, {
-            sort: {
-                date: -1
-            }, limit: 20
-        }).fetch();
+      let exclusives = Vids.find({
+        listId: "PLx0X0-cKhSOBXGK3Yr11j1HLa_ccrNO2G",
+        title: { $nin: ['Private video', 'Deleted video'] }
+      }, {
+        sort: {
+          date: -1
+        }, limit: 20
+      }).fetch();
 
-        let originals = Vids.find({
-          listId: "PLx0X0-cKhSOAwWv_GDzenSU3y4WmJn680",
-          title: {$nin: ['Private video', 'Deleted video']}
-        }, {
-            sort: {
-                date: -1
-            }, limit: 20
-        }).fetch();
+      let originals = Vids.find({
+        listId: "PLx0X0-cKhSOAwWv_GDzenSU3y4WmJn680",
+        title: { $nin: ['Private video', 'Deleted video'] }
+      }, {
+        sort: {
+          date: -1
+        }, limit: 20
+      }).fetch();
 
-        let posts = Posts.find({}, {
-            sort: {
-                date: -1
-            }, limit: 20
-        }).fetch();
+      let posts = Posts.find({}, {
+        sort: {
+          date: -1
+        }, limit: 20
+      }).fetch();
 
-        // data.showExclusives = showExclusives;
-        // data.showOriginals = showOriginals;
-        data.vids = vids;
-        data.posts = posts;
-        data.featured = featured;
-        data.exclusives = exclusives;
-        data.originals = originals;
+      // data.showExclusives = showExclusives;
+      // data.showOriginals = showOriginals;
+      data.vids = vids;
+      data.posts = posts;
+      data.featured = featured;
+      data.exclusives = exclusives;
+      data.originals = originals;
     }
     return data;
 
@@ -314,14 +314,14 @@ HomeWrapper = React.createClass({
   render() {
 
     if (this.data.loading) {
-        return (
-          <div className="loader-container">
-              <div className="loader">
-                  <p><i className="fa fa-transgender-alt fa-spin fa-2x"></i></p>
-                  <p>Loading...</p>
-              </div>
+      return (
+        <div className="loader-container">
+          <div className="loader">
+            <p><i className="fa fa-transgender-alt fa-spin fa-2x"></i></p>
+            <p>Loading...</p>
           </div>
-        )
+        </div>
+      )
     }
 
     return (

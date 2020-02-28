@@ -7,7 +7,6 @@ Header = React.createClass({
     let browseLink = FlowRouter.path("browse", {});
 
     return (
-
       <div itemScope="itemscope" itemType="http://schema.org/Article">
 
         <nav className="navbar-default navbar-fixed-top" itemScope="itemscope" itemType="http://schema.org/Article">
